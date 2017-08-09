@@ -7,8 +7,20 @@ Could you upload all the scripts used to clean your data and generate your resul
 
 This GitHub repository has the following code and documents uploaded:
 
-- Supplementary Material.docx: Page 3 for table containing all the terms included that define suicide attempt
--	SQL code: SQL code to obtain Gold Standard set for suicide ideation NLP tool evaluation
-- SQL code: SQL code to obtain Gold Standard set for suicide attempt NLP tool evaluation
--	application-resources.zip: GATE application (including the JAPE code defining the rules-based algorithm developed to identify suicide ideation)
+To generate the rules-based NLP algorithm to identify instances of suicide ideation the following GATE application was developed:
+
+-	application-resources.zip
+
+To generate the machine learning NLP algorithm to identify instances of suicide attempts the following application was used:
+
+- TextHunter. Any "behind-the-scenes" algorithms developed can be requested and provided with permission from CRIS de-identification oversight committee. 
+
+
+To clean data from machine learning algorithm identifying Suicide Attempt the following code was used: 
+
 -	Post_Processing_code: SQL code for post-processing the machine learning algorithm identifying suicide attempts.
+
+
+For details on how suicide ideation and suicide attempt were defined and manually annotated, for inter-rater agreement figures and for terms used to filter documents mentioning suicide attempt the following supplementary is provided. 
+
+- - Supplementary Material.docx. 
