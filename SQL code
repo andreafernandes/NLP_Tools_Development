@@ -1,0 +1,20 @@
+The original titles of databases are changed in line with pseudonymisation and de-identification rules
+
+
+Generating a random Gold Standard set for Suicide Ideation using SQL
+
+- SELECT    top 500 * 
+  FROM      [GATE_CRIS].[dbo].[gate_ideation] 
+  WHERE     source_table is like 'Events' or 
+            source_table is like 'Correspondence'
+  order by newid()
+  
+  
+  
+  Generating a random Gold Standard set for Suicide Attempt using SQL
+
+- SELECT    top 500 * 
+  FROM      [GATE_CRIS].[dbo].[th_suicide_attempt] 
+  WHERE     source_table is like 'Events' or 
+            source_table is like 'Correspondence'
+  order by newid()
