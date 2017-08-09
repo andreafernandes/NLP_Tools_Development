@@ -1,0 +1,151 @@
+-- Refinement of the Hybrid Machine Learning and Rules-based NLP Tool to identify instances of Suicide Attempt
+
+-- The following query is a culmination of a series of exploratory exercises which investigated false positive instances 
+-- from a suicide attempt classifier. Where a classification was incorrectly labelled as a true suicide attempt, 
+-- the text phrases on which the classifier was trained were excluded. 
+
+-- The following SQL query was written as part of a post-processing (refinement) appendage to the machine learning suicide attempt 
+-- NLP algorithm. 
+
+
+
+
+------------------------------------------POST-PROCESSING OF THE SUICIDE ATTEMPT NLP TOOL------------------------------------------
+select *
+
+from [source].[dbo].[suicide_attempt_classifier_gate_output]
+
+where suicide_attempt_instance_id
+
+NOT IN
+
+(
+
+	select 
+
+			suicide_attempt_instance_id 
+
+	from (
+		
+
+		(
+		
+		select  suicide_attempt_instance_id, 
+			    text_preceding_suicide_attempt_term, 
+			    suicide_attempt_term_match, 
+			    suicide_attempt_whole_contextString
+		
+		from    (
+	   	    	
+	   	    	select  substring(contextString,1, ABS(CAST(contextStart as int) - CAST(annotStart as int))) as text_preceding_suicide_attempt_term, 	  
+	            		suicide_attempt_term_match, 
+		    		    suicide_attempt_whole_contextString
+		    		    suicide_attempt_instance_id
+	     		from [source].[dbo].[suicide_attempt_classifier_gate_output]																	
+	     	    
+	     	    ) TableTest
+	     
+	    where    (
+		       		-- Excluding any instances where the text preceding the suicide attempt
+				-- term match is one of the following
+				
+				text_preceding_suicide_attempt_term like '%denied previous%' or 
+				text_preceding_suicide_attempt_term like '%denies previous%' or 
+				text_preceding_suicide_attempt_term like '%denied past%' or 
+				text_preceding_suicide_attempt_term like '%denies past%' or 
+				text_preceding_suicide_attempt_term like '%denied of%' or 
+				text_preceding_suicide_attempt_term like '%denies of%' or 
+				text_preceding_suicide_attempt_term like '%denied having%' or 
+				text_preceding_suicide_attempt_term like '%denied having%' or 
+				text_preceding_suicide_attempt_term like '%denies history%' or 
+				text_preceding_suicide_attempt_term like '%denies history%' or 
+				text_preceding_suicide_attempt_term like '%denies a%' or
+				text_preceding_suicide_attempt_term like '%denied a%' or
+				text_preceding_suicide_attempt_term like '%nil' or
+				text_preceding_suicide_attempt_term like '%no past%' or
+				text_preceding_suicide_attempt_term like '%never had any' or 
+				text_preceding_suicide_attempt_term like '%never%' or
+				text_preceding_suicide_attempt_term like '%no history of%' or 
+				text_preceding_suicide_attempt_term like '%no hx of%' or 
+				text_preceding_suicide_attempt_term like '%no history of actual%' or 
+				text_preceding_suicide_attempt_term like '%no history of any%' or 
+				text_preceding_suicide_attempt_term like '%no known past history of%' or 
+				text_preceding_suicide_attempt_term like '%no known history of%' or 
+				text_preceding_suicide_attempt_term like '%no recorded history of' or
+				text_preceding_suicide_attempt_term like '%no recent self-harm or' or
+				text_preceding_suicide_attempt_term like '%no self-harm or' or
+				text_preceding_suicide_attempt_term like '%no recent' or
+				text_preceding_suicide_attempt_term like '%no documented history of%' or 
+				text_preceding_suicide_attempt_term like '%no family history of%' or 
+				text_preceding_suicide_attempt_term like '%no known history of%' or 
+				text_preceding_suicide_attempt_term like '%no past history of%' or
+				text_preceding_suicide_attempt_term like '%no previous history of%' or 
+				text_preceding_suicide_attempt_term like '%no significant history of' or
+				text_preceding_suicide_attempt_term like '%no clear' or
+				text_preceding_suicide_attempt_term like '%no' or
+				text_preceding_suicide_attempt_term like '%risk of%' or
+				text_preceding_suicide_attempt_term like '%no previous' or
+				text_preceding_suicide_attempt_term like '%nor is there any history of' or
+				text_preceding_suicide_attempt_term like '%no attempts to' or 
+				text_preceding_suicide_attempt_term like '%not expressed any' or 
+				text_preceding_suicide_attempt_term like '%not made any' or 
+				text_preceding_suicide_attempt_term like '%or' or
+				text_preceding_suicide_attempt_term like '%would not' or
+				text_preceding_suicide_attempt_term like '%will not' or
+				text_preceding_suicide_attempt_term like '%going to' or
+				text_preceding_suicide_attempt_term like '%/' or
+				text_preceding_suicide_attempt_term like '%may' or
+				
+				
+				-- Excluding any instances where the suicide attempt
+				-- term match is one of the following
+				
+				suicide_attempt_term_match like '%Previously he attempt%' or 
+				suicide_attempt_term_match like '%previously also attempt%' or 
+				suicide_attempt_term_match like '%[0-9]%' or 
+				suicide_attempt_term_match like '%previous attempt%' or 
+				suicide_attempt_term_match like '%previously attempt%' or 
+				suicide_attempt_term_match like '%attempts at self-harm%' or
+				suicide_attempt_term_match like '%no attempt%' or 
+				suicide_attempt_term_match like '%not attempt%' or
+				suicide_attempt_term_match like '%no recent attempt%' or 
+				suicide_attempt_term_match like '%did not attempt%' or 
+				suicide_attempt_term_match like '%no actual%' or 
+				suicide_attempt_term_match like '%no previous%' or 
+				suicide_attempt_term_match like '%no suicid%' or 
+				suicide_attempt_term_match like '%no significant attempt%' or 
+				suicide_attempt_term_match like '%non%' or 
+				suicide_attempt_term_match like '%no history of%' or 
+				suicide_attempt_term_match like '%- no%' or 
+				suicide_attempt_term_match like '%no -%' or 
+				suicide_attempt_term_match like '%-no%' or 
+				suicide_attempt_term_match like '%no-%' or 
+				suicide_attempt_term_match like '%para%' or
+				
+				-- Excluding any instances where the wider context of the match 
+				-- is one of the following
+				
+				suicide_attempt_whole_contextString like '%Serious suicidal attempt and/or serious deliberate self-injury during the period rated%' or  
+				suicide_attempt_whole_contextString like '%;Self harm or suicide attempts:%'  or 
+				suicide_attempt_whole_contextString like '%*  *  Suicide attempts    *  *%'  or 
+				suicide_attempt_whole_contextString like '%Suicide attempts, suicidal ideation, suicidal plans, self-harm/injury, substance misuse%' or  
+				suicide_attempt_whole_contextString like '%Have you deliberately hurt yourself physically or made a suicide attempt%' or 
+				suicide_attempt_whole_contextString like '%Do not include suicidal ideation or attempts%' or 
+				suicide_attempt_whole_contextString like '%how many times has the client made a suicide attempt/engaged in%' or 
+				suicide_attempt_whole_contextString like '%(not including DSH/suicidal behaviours)%' or
+				suicide_attempt_whole_contextString like '%(1) Loss of confidence or self esteem%' or
+				suicide_attempt_whole_contextString like '%no suicidal attempt%' or
+				suicide_attempt_whole_contextString like '%no suicide attempt%' or
+				suicide_attempt_whole_contextString like '%Attempts: Methods:%' or 
+				suicide_attempt_whole_contextString like '%Does the client have a history of suicide attempts?%' or
+				suicide_attempt_whole_contextString like '%Depression Q%' 
+
+				) 
+				
+		) 
+
+	) TableProcessed1
+
+) TableProcessed2
+
+--------------------------------------------END OF QUERY--------------------------------------------
