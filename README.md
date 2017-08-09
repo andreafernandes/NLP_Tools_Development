@@ -12,5 +12,5 @@ This GitHub repository has the following code and documents uploaded:
 - Word document containing all the terms included that define suicide attempt
 -	SQL code to obtain Gold Standard set for suicide ideation NLP tool evaluation
 - SQL code to obtain Gold Standard set for suicide attempt NLP tool evaluation
--	JAPE code (the rules-based algorithm developed to identify suicide ideation)
+-	application-resources.zip: GATE application (including the JAPE code defining the rules-based algorithm developed to identify suicide ideation)
 -	SQL code for post-processing the machine learning algorithm identifying suicide attempts.
