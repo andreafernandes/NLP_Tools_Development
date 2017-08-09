@@ -13,7 +13,7 @@
 ------------------------------------------POST-PROCESSING OF THE SUICIDE ATTEMPT NLP TOOL------------------------------------------
 select *
 
-from [source].[dbo].[suicide_attempt_classifier_gate_output]
+from [source].[dbo].[suicide_attempt_NLP_output]
 
 where suicide_attempt_instance_id
 
@@ -41,7 +41,7 @@ NOT IN
 	            		suicide_attempt_term_match, 
 		    		    suicide_attempt_whole_contextString
 		    		    suicide_attempt_instance_id
-	     		from [source].[dbo].[suicide_attempt_classifier_gate_output]																	
+	     		from [source].[dbo].[suicide_attempt_NLP_output]																	
 	     	    
 	     	    ) TableTest
 	     
