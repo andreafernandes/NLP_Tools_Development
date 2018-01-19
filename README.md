@@ -1,8 +1,8 @@
 # NLP_Tools_Development
-Contains scripts used to clean data and generate results
-This repository is created in response to editor request for manuscript submission
+Contains scripts used to clean data and generate results.
+###### This repository is created in response to editor request for manuscript submission
 
-"SCIENTIFIC REPORT EDITOR REQUEST: 
+###### "SCIENTIFIC REPORT EDITOR REQUEST: 
 Could you upload all the scripts used to clean your data and generate your results to a repository such as GitHub?" 
 
 This GitHub repository has the following code and documents uploaded:
