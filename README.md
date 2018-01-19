@@ -2,6 +2,10 @@
 
 This repository is created in response to editor request for manuscript submission for the journal *Scientific Reports*
 
+## PUBLICATION TITLE:
+
+*Novel methods to Identify Suicide Ideation and Suicidal Attempts in a Psychiatric Clinical Research Database using Natural Language Processing*
+
 
 ## SCIENTIFIC REPORT EDITOR REQUEST
 
