@@ -1,9 +1,12 @@
-# NLP_Tools_Development
-Contains scripts used to clean data and generate results.
-###### This repository is created in response to editor request for manuscript submission
+###### This repository is created in response to editor request for manuscript submission for the journal Scientific Reports
 
-###### "SCIENTIFIC REPORT EDITOR REQUEST: 
-Could you upload all the scripts used to clean your data and generate your results to a repository such as GitHub?" 
+
+###### SCIENTIFIC REPORT EDITOR REQUEST: "Could you upload all the scripts used to clean your data and generate your results to a repository such as GitHub?" 
+
+
+# NLP_Tools_Development
+This repository contains scripts used to clean data and generate results.
+
 
 This GitHub repository has the following code and documents uploaded:
 
@@ -23,4 +26,4 @@ To clean data from machine learning algorithm identifying Suicide Attempt the fo
 
 For details on how suicide ideation and suicide attempt were defined and manually annotated, for inter-rater agreement figures and for terms used to filter documents mentioning suicide attempt the following supplementary is provided. 
 
-- - Supplementary Material.docx. 
+- Supplementary Material.docx
